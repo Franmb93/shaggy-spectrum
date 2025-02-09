@@ -1,9 +1,97 @@
 ---
+import { getLangFromUrl, useTranslations } from '@i18n/ui';
 
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// Personaliza tu nombre aquí
+const name = "Tu Nombre";
 ---
 
-<div id="container">
-	<main>
-		<section id="hero"></section>
-	</main>
-</div>
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+  <!-- Elementos decorativos de fondo -->
+  <div class="absolute inset-0 overflow-hidden">
+    <div class="absolute -left-4 top-1/4 w-72 h-72 bg-primary/10 rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
+    <div class="absolute -right-4 top-1/2 w-72 h-72 bg-accent/10 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
+    <div class="absolute -bottom-8 left-1/2 w-72 h-72 bg-secondary/10 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
+  </div>
+
+  <!-- Contenido principal -->
+  <div class="relative container mx-auto px-6 z-10">
+    <div class="text-center">
+      <p class="text-lg text-gray-600 dark:text-gray-400 tracking-wide animate-fade-in">
+        {t('hero.greeting')}
+      </p>
+      <h1 class="mt-2 text-6xl font-bold text-gray-900 dark:text-white tracking-tight animate-slide-up">
+        {name}
+      </h1>
+      <p class="mt-4 text-2xl font-medium text-primary dark:text-primary/90 animate-slide-up animation-delay-200">
+        {t('hero.role')}
+      </p>
+      <p class="mt-6 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto animate-slide-up animation-delay-400">
+        {t('hero.description')}
+      </p>
+      
+      <!-- Botones de acción -->
+      <div class="mt-10 flex justify-center gap-4 animate-fade-in animation-delay-600">
+        <a href="#projects" class="btn">
+          {t('hero.ctaPrimary')}
+        </a>
+        <a href="#contact" class="btn bg-gray-700 hover:bg-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600">
+          {t('hero.ctaSecondary')}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes blob {
+    0% { transform: translate(0px, 0px) scale(1); }
+    33% { transform: translate(30px, -50px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+    100% { transform: translate(0px, 0px) scale(1); }
+  }
+  
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slide-up {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  
+  .animate-blob {
+    animation: blob 7s infinite;
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 1s ease-out forwards;
+  }
+  
+  .animate-slide-up {
+    animation: slide-up 1s ease-out forwards;
+  }
+  
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+  
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+  
+  .animation-delay-600 {
+    animation-delay: 600ms;
+  }
+  
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+</style>
