@@ -30,7 +30,7 @@ Este portfolio ha sido diseñado y desarrollado con las últimas tecnologías we
 
 1. **Clona el repositorio**
    ```bash
-   git clone [tu-repositorio]
+   git clone https://github.com/Franmb93/shaggy-spectrum
    ```
 
 2. **Instala las dependencias**
@@ -74,7 +74,7 @@ Este portfolio ha sido diseñado y desarrollado con las últimas tecnologías we
 ## 🌐 Internacionalización
 
 El portfolio está disponible en:
-- 🇪🇸 Español (por defecto)
+-  Español (por defecto)
 - 🇬🇧 English
 
 ## 📄 Licencia
