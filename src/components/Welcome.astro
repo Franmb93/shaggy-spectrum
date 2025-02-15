@@ -8,59 +8,38 @@ interface Props {
 const { name = "Francisco Muñoz Betanzos" } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-
-// Tailwind class constants
-const BACKGROUND_CLASSES = "relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800";
-const BLOB_BASE_CLASSES = "absolute w-72 h-72 rounded-full mix-blend-multiply filter blur-xl";
-const BLOB_ANIMATION_CLASSES = {
-  first: "animate-[blob_7s_infinite] -left-4 top-1/4 bg-primary/10",
-  second: "animate-[blob_7s_infinite] animation-delay-2000 -right-4 top-1/2 bg-accent/10",
-  third: "animate-[blob_7s_infinite] animation-delay-4000 -bottom-8 left-1/2 bg-secondary/10"
-};
-const CONTENT_CLASSES = {
-  wrapper: "relative container mx-auto px-6 z-10",
-  greeting: "text-lg text-gray-600 dark:text-gray-400 tracking-wide animate-[fade-in_1s_ease-out_forwards]",
-  title: "mt-2 text-6xl font-bold text-gray-900 dark:text-white tracking-tight animate-[slide-up_1s_ease-out_forwards]",
-  role: "mt-4 text-2xl font-medium text-primary dark:text-primary/90 animate-[slide-up_1s_ease-out_forwards] animation-delay-200",
-  description: "mt-6 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto animate-[slide-up_1s_ease-out_forwards] animation-delay-400",
-  buttonContainer: "mt-10 flex justify-center gap-4 animate-[fade-in_1s_ease-out_forwards] animation-delay-600"
-};
-const BUTTON_CLASSES = {
-  primary: "btn",
-  secondary: "btn bg-gray-700 hover:bg-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600"
-};
 ---
 
-<section class={BACKGROUND_CLASSES}>
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-no-repeat bg-cover bg-center" style="background-image: url('/src/assets/background.svg');">
   <!-- Decorative background elements -->
-  <div class="absolute inset-0 overflow-hidden">
-    <div class={`${BLOB_BASE_CLASSES} ${BLOB_ANIMATION_CLASSES.first}`}></div>
-    <div class={`${BLOB_BASE_CLASSES} ${BLOB_ANIMATION_CLASSES.second}`}></div>
-    <div class={`${BLOB_BASE_CLASSES} ${BLOB_ANIMATION_CLASSES.third}`}></div>
+  <div class="absolute inset-0 overflow-hidden ">
+    <div class="absolute w-72 h-72 rounded-full mix-blend-multiply filter blur-xl animate-[blob_7s_infinite] -left-4 top-1/4 bg-primary/10"></div>
+    <div class="absolute w-72 h-72 rounded-full mix-blend-multiply filter blur-xl animate-[blob_7s_infinite] animation-delay-2000 -right-4 top-1/2 bg-accent/10"></div>
+    <div class="absolute w-72 h-72 rounded-full mix-blend-multiply filter blur-xl animate-[blob_7s_infinite] animation-delay-4000 -bottom-8 left-1/2 bg-secondary/10"></div>
   </div>
 
   <!-- Main content -->
-  <div class={CONTENT_CLASSES.wrapper}>
+  <div class="relative container mx-auto px-6 z-10">
     <div class="text-center">
-      <p class={CONTENT_CLASSES.greeting}>
+      <p class="text-lg text-gray-600 dark:text-gray-400 tracking-wide animate-[fade-in_1s_ease-out_forwards]">
         {t('hero.greeting')}
       </p>
-      <h1 class={CONTENT_CLASSES.title}>
+      <h1 class="mt-2 text-6xl font-bold text-gray-900 dark:text-white tracking-tight animate-[slide-up_1s_ease-out_forwards]">
         {name}
       </h1>
-      <p class={CONTENT_CLASSES.role}>
+      <p class="mt-4 text-2xl font-medium text-primary dark:text-primary/90 animate-[slide-up_1s_ease-out_forwards] animation-delay-200">
         {t('hero.role')}
       </p>
-      <p class={CONTENT_CLASSES.description}>
+      <p class="mt-6 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto animate-[slide-up_1s_ease-out_forwards] animation-delay-400">
         {t('hero.description')}
       </p>
-      
+
       <!-- Action buttons -->
-      <div class={CONTENT_CLASSES.buttonContainer}>
-        <a href="#projects" class={BUTTON_CLASSES.primary}>
+      <div class="mt-10 flex justify-center gap-4 animate-[fade-in_1s_ease-out_forwards] animation-delay-600">
+        <a href="#projects" class="btn">
           {t('hero.ctaPrimary')}
         </a>
-        <a href="#contact" class={BUTTON_CLASSES.secondary}>
+        <a href="#contact" class="btn bg-gray-700 hover:bg-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600">
           {t('hero.ctaSecondary')}
         </a>
       </div>
