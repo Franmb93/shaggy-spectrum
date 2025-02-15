@@ -1,43 +1,66 @@
 ---
 import { getLangFromUrl, useTranslations } from '@i18n/ui';
 
+interface Props {
+  name?: string;
+}
+
+const { name = "Francisco Muñoz Betanzos" } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-// Personaliza tu nombre aquí
-const name = "Tu Nombre";
+// Tailwind class constants
+const BACKGROUND_CLASSES = "relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800";
+const BLOB_BASE_CLASSES = "absolute w-72 h-72 rounded-full mix-blend-multiply filter blur-xl";
+const BLOB_ANIMATION_CLASSES = {
+  first: "animate-[blob_7s_infinite] -left-4 top-1/4 bg-primary/10",
+  second: "animate-[blob_7s_infinite] animation-delay-2000 -right-4 top-1/2 bg-accent/10",
+  third: "animate-[blob_7s_infinite] animation-delay-4000 -bottom-8 left-1/2 bg-secondary/10"
+};
+const CONTENT_CLASSES = {
+  wrapper: "relative container mx-auto px-6 z-10",
+  greeting: "text-lg text-gray-600 dark:text-gray-400 tracking-wide animate-[fade-in_1s_ease-out_forwards]",
+  title: "mt-2 text-6xl font-bold text-gray-900 dark:text-white tracking-tight animate-[slide-up_1s_ease-out_forwards]",
+  role: "mt-4 text-2xl font-medium text-primary dark:text-primary/90 animate-[slide-up_1s_ease-out_forwards] animation-delay-200",
+  description: "mt-6 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto animate-[slide-up_1s_ease-out_forwards] animation-delay-400",
+  buttonContainer: "mt-10 flex justify-center gap-4 animate-[fade-in_1s_ease-out_forwards] animation-delay-600"
+};
+const BUTTON_CLASSES = {
+  primary: "btn",
+  secondary: "btn bg-gray-700 hover:bg-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600"
+};
 ---
 
-<section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
-  <!-- Elementos decorativos de fondo -->
+<section class={BACKGROUND_CLASSES}>
+  <!-- Decorative background elements -->
   <div class="absolute inset-0 overflow-hidden">
-    <div class="absolute -left-4 top-1/4 w-72 h-72 bg-primary/10 rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
-    <div class="absolute -right-4 top-1/2 w-72 h-72 bg-accent/10 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
-    <div class="absolute -bottom-8 left-1/2 w-72 h-72 bg-secondary/10 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
+    <div class={`${BLOB_BASE_CLASSES} ${BLOB_ANIMATION_CLASSES.first}`}></div>
+    <div class={`${BLOB_BASE_CLASSES} ${BLOB_ANIMATION_CLASSES.second}`}></div>
+    <div class={`${BLOB_BASE_CLASSES} ${BLOB_ANIMATION_CLASSES.third}`}></div>
   </div>
 
-  <!-- Contenido principal -->
-  <div class="relative container mx-auto px-6 z-10">
+  <!-- Main content -->
+  <div class={CONTENT_CLASSES.wrapper}>
     <div class="text-center">
-      <p class="text-lg text-gray-600 dark:text-gray-400 tracking-wide animate-fade-in">
+      <p class={CONTENT_CLASSES.greeting}>
         {t('hero.greeting')}
       </p>
-      <h1 class="mt-2 text-6xl font-bold text-gray-900 dark:text-white tracking-tight animate-slide-up">
+      <h1 class={CONTENT_CLASSES.title}>
         {name}
       </h1>
-      <p class="mt-4 text-2xl font-medium text-primary dark:text-primary/90 animate-slide-up animation-delay-200">
+      <p class={CONTENT_CLASSES.role}>
         {t('hero.role')}
       </p>
-      <p class="mt-6 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto animate-slide-up animation-delay-400">
+      <p class={CONTENT_CLASSES.description}>
         {t('hero.description')}
       </p>
       
-      <!-- Botones de acción -->
-      <div class="mt-10 flex justify-center gap-4 animate-fade-in animation-delay-600">
-        <a href="#projects" class="btn">
+      <!-- Action buttons -->
+      <div class={CONTENT_CLASSES.buttonContainer}>
+        <a href="#projects" class={BUTTON_CLASSES.primary}>
           {t('hero.ctaPrimary')}
         </a>
-        <a href="#contact" class="btn bg-gray-700 hover:bg-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600">
+        <a href="#contact" class={BUTTON_CLASSES.secondary}>
           {t('hero.ctaSecondary')}
         </a>
       </div>
@@ -45,7 +68,7 @@ const name = "Tu Nombre";
   </div>
 </section>
 
-<style>
+<style is:global>
   @keyframes blob {
     0% { transform: translate(0px, 0px) scale(1); }
     33% { transform: translate(30px, -50px) scale(1.1); }
@@ -61,18 +84,6 @@ const name = "Tu Nombre";
   @keyframes slide-up {
     from { transform: translateY(20px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
-  }
-  
-  .animate-blob {
-    animation: blob 7s infinite;
-  }
-  
-  .animate-fade-in {
-    animation: fade-in 1s ease-out forwards;
-  }
-  
-  .animate-slide-up {
-    animation: slide-up 1s ease-out forwards;
   }
   
   .animation-delay-200 {
